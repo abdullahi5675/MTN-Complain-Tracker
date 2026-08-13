@@ -1,0 +1,61 @@
+{% load static %}
+{% if messages %}
+  {% for message in messages %}
+    <p style="color: green;">{{ message }}</p>
+  {% endfor %}
+{% endif %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Complaint</title>
+    <meta http-equiv="Cache-Control" content="no-store" />
+</head>
+<body>
+    <h2>Submit Your Complaint</h2>
+    <form method="post">
+    {% csrf_token %}
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label for="phone_number">Phone Number:</label><br>  <!-- ✅ updated -->
+    <input type="text" name="phone_number" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label for="service_type">Service Type:</label><br>
+    <select name="service_type" required>
+        <option value="Call Drop">Call Drop</option>
+        <option value="Slow Internet">Slow Internet</option>
+        <option value="SMS Failure">SMS Failure</option>
+        <option value="No Network">No Network</option>
+    </select><br><br>
+
+    <label for="description">Description:</label><br>   <!-- ✅ added -->
+    <textarea name="description" rows="4" cols="50" required></textarea><br><br>
+
+    <label for="complaint">Additional Complaint Info (Optional):</label><br>
+    <textarea name="complaint" rows="3" cols="50"></textarea><br><br>
+
+    <button type="submit">Submit Complaint</button>
+</form>
+
+<script>
+window.onload = function() {
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    document.querySelectorAll('input, textarea').forEach(el => el.value = '');
+};
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You - MTN Complaint Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #FFF9E5;
+            /* MTN soft yellow background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .thank-you-box {
+            background-color: #ffffff;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 450px;
+        }
+
+        .thank-you-box h1 {
+            color: #000000;
+            /* Black text for strong MTN contrast */
+            background-color: #FFCC00;
+            /* MTN yellow header */
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .thank-you-box p {
+            font-size: 17px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .thank-you-box a {
+            display: inline-block;
+            background-color: #000000;
+            /* MTN black button */
+            color: #FFCC00;
+            /* MTN yellow text */
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 6px;
+            transition: 0.3s ease;
+        }
+
+        .thank-you-box a:hover {
+            background-color: #FFCC00;
+            color: #000000;
+            /* invert on hover */
+        }
+
+        .mtn-logo {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .thank-you-box {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thank-you-box">
+
+        <h1>Thank You!</h1>
+        <p>Your complaint has been submitted successfully. Our team will review it and take necessary action promptly.
+        </p>
+        <a href="{% url 'home' %}">Return to Home</a>
+    </div>
+</body>
+
+</html>

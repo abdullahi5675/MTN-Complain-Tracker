@@ -1,0 +1,60 @@
+/* === MTN ADMIN PANEL THEME === */
+
+/* Background and sidebar */
+body {
+    background-color: #FFF9E5 !important; /* Soft MTN yellow */
+    font-family: 'Segoe UI', sans-serif !important;
+}
+
+/* Header bar */
+#header {
+    background-color: #000000 !important; /* MTN black */
+    color: #FFCC00 !important;
+    border-bottom: 3px solid #FFCC00;
+}
+
+/* Header links */
+#header a:link, #header a:visited {
+    color: #FFCC00 !important;
+    font-weight: bold;
+}
+#header a:hover {
+    color: #fff !important;
+}
+
+/* Sidebar menu */
+#content-main .module caption,
+#content-main .module h2 {
+    background-color: #FFCC00 !important;
+    color: #000 !important;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+}
+
+/* Buttons */
+.button, input[type=submit], input[type=button] {
+    background-color: #FFCC00 !important;
+    border: none !important;
+    color: #000 !important;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background-color: #000 !important;
+    color: #FFCC00 !important;
+}
+
+/* Table headers */
+#content table thead th {
+    background-color: #000 !important;
+    color: #FFCC00 !important;
+    font-weight: bold;
+}
+
+/* Footer */
+#footer {
+    background-color: #000 !important;
+    color: #FFCC00 !important;
+    padding: 10px;
+    text-align: center;
+}

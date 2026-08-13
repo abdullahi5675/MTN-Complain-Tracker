@@ -1,0 +1,12 @@
+{% extends "admin/index.html" %}
+{% block content %}
+    {{ block.super }}
+    <div class="module">
+        <h2></h2>
+        <ul>
+            {% for link in custom_links %}
+                
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

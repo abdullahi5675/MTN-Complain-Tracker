@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Complaints</title>
+</head>
+<body>
+    <h2>All Submitted Complaints</h2>
+
+    {% if complaints %}
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Service Type</th>
+                <th>Description</th>
+                <th>Submitted At</th>
+            </tr>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.name }}</td>
+                <td>{{ complaint.phone_number }}</td>
+                <td>{{ complaint.email }}</td>
+                <td>{{ complaint.service_type }}</td>
+                <td>{{ complaint.description }}</td>
+                <td>{{ complaint.submitted_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No complaints have been submitted yet.</p>
+    {% endif %}
+</body>
+</html>

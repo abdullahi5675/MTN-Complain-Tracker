@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}My Complaint History{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #FFF9E5; /* MTN soft yellow */
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .his {
+        text-align: center;
+        background-color: #FFCC00; /* MTN Yellow */
+        color: #000;
+        padding: 15px;
+        border-radius: 8px;
+        width: fit-content;
+        margin: 25px auto 10px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    table {
+        width: 90%;
+        margin: 25px auto;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    thead {
+        background-color: #000000; /* Black header */
+        color: #FFCC00; /* MTN Yellow text */
+    }
+
+    th, td {
+        padding: 14px;
+        text-align: left;
+        font-size: 15px;
+    }
+
+    th {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+        background-color: #FFF2B2; /* Light yellow hover */
+    }
+
+    td span {
+        padding: 6px 12px;
+        border-radius: 14px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .status-pending {
+        background-color: #D32F2F; /* Red */
+    }
+
+    .status-progress {
+        background-color: #FFA000; /* Orange */
+    }
+
+    .status-resolved {
+        background-color: #388E3C; /* Green */
+    }
+
+    .no-complaint {
+        text-align: center;
+        padding: 20px;
+        color: #555;
+    }
+
+    .footer {
+        text-align: center;
+        color: #777;
+        font-size: 14px;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+
+<h2 class="his">My Complaint History</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Service Type</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Submitted At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for complaint in complaints %}
+        <tr>
+            <td>{{ complaint.service_type }}</td>
+            <td>{{ complaint.description }}</td>
+            <td style="text-align:center;">
+                {% if complaint.status == "Pending" %}
+                    <span class="status-pending">Pending</span>
+                {% elif complaint.status == "In Progress" %}
+                    <span class="status-progress">In Progress</span>
+                {% elif complaint.status == "Resolved" %}
+                    <span class="status-resolved">Resolved</span>
+                {% endif %}
+            </td>
+            <td>{{ complaint.submitted_at|date:"M j, Y, g:i a" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="no-complaint">You have not submitted any complaints yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="footer">
+    &copy; {% now "Y" %} MTN Complaint Tracking System. All rights reserved.
+</div>
+{% endblock %}

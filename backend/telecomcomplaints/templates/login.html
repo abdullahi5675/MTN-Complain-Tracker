@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTN Complaint Portal - Login</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #F5F5F5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* ======== NAVBAR ======== */
+        nav {
+            background-color: #000000;
+            color: #FFCC00;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* ======== LOGIN CONTAINER ======== */
+        .container {
+            background: #FFFFFF;
+            width: 400px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-top: 8px solid #FFCC00;
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 25px;
+        }
+
+        /* ======== FORM STYLES ======== */
+        form { display: flex; flex-direction: column; }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 40px 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #FFCC00;
+            outline: none;
+            box-shadow: 0 0 4px rgba(255,204,0,0.5);
+        }
+
+        /* ======== PASSWORD WRAPPER ======== */
+        .password-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .password-wrapper input {
+            width: 100%;
+            padding: 10px 42px 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 0;
+            transition: 0.3s;
+        }
+        .password-wrapper input:focus {
+            border-color: #FFCC00;
+            outline: none;
+            box-shadow: 0 0 4px rgba(255,204,0,0.5);
+        }
+        .toggle-eye {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+            color: #888;
+            transition: color 0.2s;
+        }
+        .toggle-eye:hover { color: #000; }
+
+        /* ======== BUTTONS ======== */
+        .login-btn {
+            background-color: #FFCC00;
+            color: #000000;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+        .login-btn:hover { background-color: #e6b800; }
+
+        .admin-btn {
+            background-color: #000000;
+            color: #FFCC00;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 11px;
+            font-size: 15px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .admin-btn:hover {
+            background-color: #222;
+            color: #FFCC00;
+        }
+
+        /* ======== LINKS ======== */
+        .link-row {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+        .link-row a {
+            color: #000;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .link-row a:hover { color: #b38600; }
+
+        /* ======== MESSAGES ======== */
+        .messages {
+            margin-bottom: 15px;
+        }
+        .messages p {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+        .messages .error   { background:#ffe5e5; color:#c0392b; border-left:4px solid #c0392b; }
+        .messages .success { background:#e6ffed; color:#1a7a3c; border-left:4px solid #27ae60; }
+        .messages .info    { background:#e8f4fd; color:#1a5276; border-left:4px solid #2980b9; }
+
+        /* ======== DIVIDER ======== */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 8px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        /* ======== FOOTER ======== */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <nav>MTN Complaint &amp; Tracking System</nav>
+
+    <div class="container">
+        <h2>🔑 Login to Your Account</h2>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" id="loginForm">
+            {% csrf_token %}
+
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+
+            <label for="id_password">Password:</label>
+            <div class="password-wrapper">
+                <input type="password" name="password" id="id_password" placeholder="Enter your password" required autocomplete="current-password">
+                <span class="toggle-eye" onclick="togglePassword('id_password', this)" title="Show/Hide password">👁️</span>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <!-- ===== DIVIDER ===== -->
+        <div class="divider">or</div>
+
+        <!-- ===== ADMIN PORTAL BUTTON ===== -->
+        <a href="/admin/" class="admin-btn">⚙️ Go to Admin Portal</a>
+
+        <!-- ===== BOTTOM LINKS ===== -->
+        <div class="link-row">
+            Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+        </div>
+        <div class="link-row" style="margin-top:8px;">
+            <a href="{% url 'forgot_password' %}" style="color:#888; font-weight:normal; font-size:13px;">Forgot your password?</a>
+        </div>
+        {% if show_verify_link %}
+        <div class="link-row" style="margin-top:10px;">
+            <a href="{% url 'verify_email' %}" style="color:#c0392b;">→ Go to Email Verification</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer>© {% now "Y" %} MTN Nigeria — Customer Complaint Portal</footer>
+
+    <script>
+        function togglePassword(inputId, eyeIcon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeIcon.textContent = '🙈';
+                eyeIcon.title = 'Hide password';
+            } else {
+                input.type = 'password';
+                eyeIcon.textContent = '👁️';
+                eyeIcon.title = 'Show password';
+            }
+        }
+
+        // Add placeholder to username field rendered by Django form
+        document.addEventListener('DOMContentLoaded', function () {
+            const uField = document.getElementById('id_username');
+            if (uField) uField.placeholder = 'Enter your username';
+        });
+    </script>
+</body>
+</html>

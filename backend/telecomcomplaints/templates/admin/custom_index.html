@@ -1,0 +1,13 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+    {{ block.super }}  {# keeps default dashboard #}
+
+    <div style="margin-top:20px;">
+        <h2>📊 Analytics</h2>
+        <p><a href="{% url 'admin:complaints_by_location' %}" 
+              style="color:#0a2e5c; font-weight:bold;">
+              View Complaints by Location
+        </a></p>
+    </div>
+{% endblock %}

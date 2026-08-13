@@ -1,0 +1,58 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<canvas id="complaintsChart" width="900" height="400"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('complaintsChart').getContext('2d');
+
+    const locations = {{ locations|safe }};
+    const serviceTypes = {{ service_types|safe }};
+    const datasetMap = {{ dataset_map|safe }};
+
+    // Color for each complaint type
+    const colorMap = {
+        "Call Drop": "rgba(255, 99, 132, 0.8)",
+        "SMS Failure": "rgba(255, 159, 64, 0.8)",
+        "Slow Internet": "rgba(54, 162, 235, 0.8)",
+        "No Network": "rgba(153, 102, 255, 0.8)"
+    };
+
+    const datasets = serviceTypes.map(stype => ({
+        label: stype,
+        data: datasetMap[stype],
+        backgroundColor: colorMap[stype] || "rgba(200,200,200,0.7)",
+        borderRadius: 5
+    }));
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: locations,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: {
+                    display: true,
+                    text: 'Complaints by Location and Type'
+                }
+            },
+            scales: {
+                x: {
+                    stacked: false,  // <- FIXED
+                    ticks: { autoSkip: false, maxRotation: 90 }
+                },
+                y: {
+                    stacked: false,  // <- FIXED
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
