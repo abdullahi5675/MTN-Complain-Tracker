@@ -8,7 +8,6 @@ class Complaint(models.Model):
         ('Call Drop', 'Call Drop'),
         ('Slow Internet', 'Slow Internet'),
         ('SMS Failure', 'SMS Failure'),
-        ('No Network', 'No Network'),
     ]
 
     # Link to user, allow null for old records
